@@ -69,7 +69,7 @@ ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 5. 在foxglove studio中点击右上角的“设置”按钮，在左侧弹出的面板中将雷达话题配置“可见”，此时studio中讲实时显示雷达点图
 
-![foxglove](images/foxglove_show.jpg  "CONFIG")
+![foxglove](images/foxglove_show.png  "CONFIG")
 
 ### 方式3 使用RVIZ方式可视化
 
