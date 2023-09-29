@@ -21,7 +21,7 @@ parameters=[
 def generate_launch_description():
   # LiDAR publisher node
   ordlidar_node = Node(
-      package='tros_oradar_lidar_ms200',
+      package='oradar_lidar_ms200',
       executable='oradar_scan',
       name='MS200',
       output='screen',

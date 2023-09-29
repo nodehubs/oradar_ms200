@@ -1,6 +1,6 @@
 # 功能介绍
 
-tros_oradar_lidar_ms200包用于连接Oradar MS200激光雷达，以ROS2标准消息格式发送激光雷达数据。
+oradar_lidar_ms200包用于连接Oradar MS200激光雷达，以ROS2标准消息格式发送激光雷达数据。
 
 # 物品清单
 
@@ -23,7 +23,7 @@ tros_oradar_lidar_ms200包用于连接Oradar MS200激光雷达，以ROS2标准�
 
 ```bash
 sudo apt update
-sudo apt install -y tros_oradar_lidar_ms200
+sudo apt install -y tros-oradar-lidar-ms200
 ```
 ## 运行奥比中光MS200
 
@@ -31,7 +31,7 @@ sudo apt install -y tros_oradar_lidar_ms200
 
 ```bash
 source /opt/tros/setup.bash
-ros2 launch tros_oradar_lidar_ms200 ms200_scan.launch.py
+ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
 ```
 
 ## 查看雷达数据

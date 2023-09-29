@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="tros_oradar_lidar_ms200" type="oradar_scan" name="oradar_scan" respawn="false" output="screen">
+  <node pkg="oradar_lidar_ms200" type="oradar_scan" name="oradar_scan" respawn="false" output="screen">
 
     <param name="device_model" type="string"   value="MS200"/>				<!--设备型号: MS200-->
     <param name="frame_id"     type="string"   value="laser_frame"/>  <!--配置frame_id-->
@@ -15,5 +15,5 @@
   
   </node>
   
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tros_oradar_lidar_ms200)/rviz/oradar_scan.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find oradar_lidar_ms200)/rviz/oradar_scan.rviz" />
 </launch>
