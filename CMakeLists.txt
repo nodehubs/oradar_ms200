@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(tros_oradar_lidar_ms200)
+project(oradar_lidar_ms200)
 
 #=======================================
 # Compile setup (CATKIN, COLCON)

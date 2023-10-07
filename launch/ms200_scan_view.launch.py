@@ -9,7 +9,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 def generate_launch_description():
   # RViZ2 settings
   rviz2_config = os.path.join(
-      get_package_share_directory('tros_oradar_lidar_ms200'),
+      get_package_share_directory('oradar_lidar_ms200'),
       'rviz2',
       'oradar_scan.rviz'
   )
@@ -25,7 +25,7 @@ def generate_launch_description():
   #Include OrdLidar launch file
   ordlidar_launch = IncludeLaunchDescription(
       launch_description_source=PythonLaunchDescriptionSource([
-          get_package_share_directory('tros_oradar_lidar_ms200'),
+          get_package_share_directory('oradar_lidar_ms200'),
           '/launch/ms200_scan.launch.py'
       ])
   )
