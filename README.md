@@ -1,105 +1,106 @@
-# 功能介绍
+English| [简体中文](./README_cn.md)
 
-oradar_lidar_ms200包用于连接Oradar MS200激光雷达，以ROS2标准消息格式发送激光雷达数据。
+# Function Introduction
 
-# 物品清单
+oradar_lidar_ms200 package is used to connect the Oradar MS200 LiDAR sensor and send LiDAR data in ROS2 standard message format.
 
-| 物料选项    | 清单      | 
+# Inventory
+
+| Item Options    | List      | 
 | ------- | ------------ | 
-| RDK X3  | [购买链接](https://developer.horizon.ai/sunrise) | 
-| 奥比中光 MS200 | [购买链接](https://detail.tmall.com/item.htm?abbucket=4&id=706184556245&rn=079d616b9d44563c5768b03d2f9685c3&spm=a1z10.5-b-s.w4011-22651484606.62.47611e0b5uUKiZ&skuId=5137196470232) | 
+| RDK X3  | [Purchase Link](https://developer.horizon.ai/sunrise) | 
+| Orbbec Astra Mini  | [Purchase Link](https://detail.tmall.com/item.htm?abbucket=4&id=706184556245&rn=079d616b9d44563c5768b03d2f9685c3&spm=a1z10.5-b-s.w4011-22651484606.62.47611e0b5uUKiZ&skuId=5137196470232) | 
 
-# 使用方法
+# Usage
 
-## 准备工作
+## Preparations
 
-1. 地平线RDK已烧录好地平线提供的Ubuntu 20.04系统镜像。
+1. The Horizon RDK has been loaded with the Ubuntu 20.04 system image provided by Horizon.
 
-2. 奥比中光MS200正确链接RDK X3
+2. Orbbec Astra Mini is correctly connected to RDK X3.
 
-## 安装奥比中光MS200驱动
+## Installing Orbbec Astra Mini Driver
 
-通过终端或者VNC连接RDK X3，执行以下命令
+Connect to RDK X3 via terminal or VNC, and execute the following commands
 
 ```bash
 sudo apt update
 sudo apt install -y tros-oradar-lidar-ms200
 ```
-## 运行奥比中光MS200
 
-在RDK终端中，执行以下命令启动MS200
+## Running Orbbec Astra Mini
+
+In the RDK terminal, execute the following command to launch the MS200
 
 ```bash
 source /opt/tros/setup.bash
 ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
 ```
 
-## 查看雷达数据
+## Viewing LiDAR Data
 
-### 方式1 命令行方式
+### Method 1 Command Line Way
 
-新打开一个终端，在里面输入以下命令查看激光雷达输出数据
+Open a new terminal and enter the following command to view the LiDAR output data
 
 ```bash
 source /opt/tros/setup.bash
 ros2 topic echo /MS200/scan
 ```
 
-### 方式2 使用foxglove可视化
+### Method 2 Using foxglove Visualization
 
-***注意：运行Foxglove Studio的设备应与RDK设备处于同一网段***
+***Note: The device running Foxglove Studio should be on the same network segment as the RDK device***1. Visit the [official website](https://foxglove.dev/download) of Foxglove Studio and install it on your PC.
 
-1. 前往foxglove[官网下载](https://foxglove.dev/download)Foxglove Studio,并在PC上进行安装
-
-2. 新打开一个RDK终端并输入以下命令安装rosbridge
+2. Open a new RDK terminal and enter the following command to install rosbridge
 
 ```bash
 sudo apt install ros-foxy-rosbridge-suite
 ```
 
-3. 运行以下命令启动rosbridge
+3. Run the following command to start rosbridge
 
 ```bash
-source /opt/tros/setup.bash
+source /opt/ros/setup.bash
 ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 ```
-4. 打开Foxglove Studio，选择“打开连接”，在接下来的对话框中选择rosbridge连接方式，并填入RDK的ip地址取代localhost
+
+4. Open Foxglove Studio, select "Open Connection", choose rosbridge as the connection method in the upcoming dialog box, and enter the RDK's IP address instead of localhost.
 
 ![foxglove](images/foxglove_1.jpg  "CONFIG")
 
-5. 在foxglove studio中点击右上角的“设置”按钮，在左侧弹出的面板中将雷达话题配置“可见”，此时studio中讲实时显示雷达点图
+5. In Foxglove Studio, click the "Settings" button in the top right corner, and in the panel that pops up on the left, configure the radar topic to be "visible". At this point, the studio will display real-time radar point data.
 
 ![foxglove](images/foxglove_show.png  "CONFIG")
 
-### 方式3 使用RVIZ方式可视化
+### Method 3: Visualization Using RVIZ
 
-在PC或者支持RVIZ的环境下安装ROS2，这里以foxy版本为例，运行
+Install ROS2 on a PC or in an environment that supports RVIZ. Taking the example of the foxy version, run the following command:
 
 ```bash
 source /opt/ros/foxy/setup.bash
 ros2 run rviz2 rviz2
 ```
 
-# 接口说明
+# Interface Description
 
-## 话题
+## Topics
 
-### 发布话题
-| 话题                | 类型                    | 描述                                      |
-|----------------------|-------------------------|--------------------------------------------------|
-| /MS200/scan               | sensor_msgs/LaserScan   | 二维激光雷达扫描数据                |
+### Publishing Topics
+| Topic           | Type                   | Description                                |
+|-----------------|------------------------|--------------------------------------------|
+| /MS200/scan     | sensor_msgs/LaserScan  | Two-dimensional laser scan data            |
 
-## 参数
+## Parameters
 
-   | 参数名      | 数据类型 | 描述                                                         |
-   | ----------- | -------- | ------------------------------------------------------------ |
-   | frame_id    | string   | 激光雷达坐标系名称。 默认为laser_frame                       |
-   | scan_topic  | string   | LaserScan主题名。 默认为scan                                 |
-   | port_name   | string   | 激光雷达串口名称。 默认值为/dev/ttyACM0                      |
-   | baudrate    | int      | 雷达串口波特率.。 默认值为230400                             |
-   | angle_min   | double   | 最小角度，单位度，取值范围[0, 360]。 默认值为0 |
-   | angle_max   | double   | 最大角度，单位度，取值范围[0, 360]。 默认值为360 |
-   | range_min   | double   | 最小距离，单位米，默认值为0.05                               |
-   | range_max   | double   | 最大距离，单位米，默认值为20.0                               |
-   | clockwise    | bool     | 配置点云方向，true为顺时针， false为逆时针。默认为false |
-   | motor_speed | int      | 雷达转速，单位Hz，取值范围为5~15Hz。默认值为10Hz             |
+| Parameter   | Data Type | Description                                |
+|------------ |-----------|--------------------------------------------|
+| frame_id    | string    | Name of the laser frame. Default is laser_frame |
+| scan_topic  | string    | Name of the LaserScan topic. Default is scan    |
+| port_name   | string    | Name of the laser port. Default is /dev/ttyACM0 |
+| baudrate    | int       | Baud rate of the radar port. Default is 230400  |
+| angle_min   | double    | Minimum angle in degrees, range [0, 360]. Default is 0 || angle_max   | double   | Maximum angle in degrees, with valid range [0, 360]. Default value is 360. |
+   | range_min   | double   | Minimum distance in meters, with default value of 0.05.              |
+   | range_max   | double   | Maximum distance in meters, with default value of 20.0.              |
+   | clockwise    | bool     | Configure the direction of point cloud, true for clockwise and false for counterclockwise. Default is false. |
+   | motor_speed | int      | Radar rotation speed in Hz, with valid range of 5 to 15Hz. Default value is 10Hz. |
