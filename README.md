@@ -23,17 +23,29 @@ oradar_lidar_ms200 package is used to connect the Oradar MS200 LiDAR sensor and 
 
 Connect to RDK X3 via terminal or VNC, and execute the following commands
 
+tros foxy: 
 ```bash
 sudo apt update
 sudo apt install -y tros-oradar-lidar-ms200
+```
+tros humble:
+```bash
+sudo apt update
+sudo apt install -y tros-humble-oradar-lidar-ms200
 ```
 
 ## Running Orbbec Astra Mini
 
 In the RDK terminal, execute the following command to launch the MS200
 
+tros foxy:
 ```bash
 source /opt/tros/setup.bash
+ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
+```
+tros humble:
+```bash
+source /opt/tros/humble/setup.bash
 ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
 ```
 
@@ -43,8 +55,14 @@ ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
 
 Open a new terminal and enter the following command to view the LiDAR output data
 
+tros foxy:
 ```bash
 source /opt/tros/setup.bash
+ros2 topic echo /MS200/scan
+```
+tros humble:
+```bash
+source /opt/tros/humble/setup.bash
 ros2 topic echo /MS200/scan
 ```
 
@@ -54,16 +72,29 @@ ros2 topic echo /MS200/scan
 
 2. Open a new RDK terminal and enter the following command to install rosbridge
 
-```bash
-sudo apt install ros-foxy-rosbridge-suite
-```
+   tros foxy: 
+   ```bash
+   sudo apt update
+   sudo apt install -y ros-foxy-rosbridge-suite
+   ```
+   tros humble:
+   ```bash
+   sudo apt update
+   sudo apt install -y ros-humble-rosbridge-suite
+   ```
 
 3. Run the following command to start rosbridge
 
-```bash
-source /opt/ros/setup.bash
-ros2 launch rosbridge_server rosbridge_websocket_launch.xml
-```
+   tros foxy:
+   ```bash
+   source /opt/tros/setup.bash
+   ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+   ```
+   tros humble:
+   ```bash
+   source /opt/tros/humble/setup.bash
+   ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+   ```
 
 4. Open Foxglove Studio, select "Open Connection", choose rosbridge as the connection method in the upcoming dialog box, and enter the RDK's IP address instead of localhost.
 
@@ -77,8 +108,14 @@ ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 Install ROS2 on a PC or in an environment that supports RVIZ. Taking the example of the foxy version, run the following command:
 
+tros foxy:
 ```bash
 source /opt/ros/foxy/setup.bash
+ros2 run rviz2 rviz2
+```
+tros humble:
+```bash
+source /opt/ros/humble/setup.bash
 ros2 run rviz2 rviz2
 ```
 

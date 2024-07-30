@@ -23,16 +23,29 @@ oradar_lidar_ms200包用于连接Oradar MS200激光雷达，以ROS2标准消息�
 
 通过终端或者VNC连接RDK X3，执行以下命令
 
+tros foxy 版本 
 ```bash
 sudo apt update
 sudo apt install -y tros-oradar-lidar-ms200
 ```
+tros humble 版本
+```bash
+sudo apt update
+sudo apt install -y tros-humble-oradar-lidar-ms200
+```
+
 ## 运行奥比中光MS200
 
 在RDK终端中，执行以下命令启动MS200
 
+tros foxy 版本
 ```bash
 source /opt/tros/setup.bash
+ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
+```
+tros humble 版本
+```bash
+source /opt/tros/humble/setup.bash
 ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
 ```
 
@@ -42,8 +55,14 @@ ros2 launch oradar_lidar_ms200 ms200_scan.launch.py
 
 新打开一个终端，在里面输入以下命令查看激光雷达输出数据
 
+tros foxy 版本
 ```bash
 source /opt/tros/setup.bash
+ros2 topic echo /MS200/scan
+```
+tros humble 版本
+```bash
+source /opt/tros/humble/setup.bash
 ros2 topic echo /MS200/scan
 ```
 
@@ -55,16 +74,31 @@ ros2 topic echo /MS200/scan
 
 2. 新打开一个RDK终端并输入以下命令安装rosbridge
 
-```bash
-sudo apt install ros-foxy-rosbridge-suite
-```
+   tros foxy 版本 
+   ```bash
+   sudo apt update
+   sudo apt install -y ros-foxy-rosbridge-suite
+   ```
+   tros humble 版本
+   ```bash
+   sudo apt update
+   sudo apt install -y ros-humble-rosbridge-suite
+   ```
+
 
 3. 运行以下命令启动rosbridge
 
-```bash
-source /opt/tros/setup.bash
-ros2 launch rosbridge_server rosbridge_websocket_launch.xml
-```
+   tros foxy 版本
+   ```bash
+   source /opt/tros/setup.bash
+   ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+   ```
+   tros humble 版本
+   ```bash
+   source /opt/tros/humble/setup.bash
+   ros2 launch rosbridge_server rosbridge_websocket_launch.xml
+   ```
+
 4. 打开Foxglove Studio，选择“打开连接”，在接下来的对话框中选择rosbridge连接方式，并填入RDK的ip地址取代localhost
 
 ![foxglove](images/foxglove_1.jpg  "CONFIG")
@@ -77,8 +111,14 @@ ros2 launch rosbridge_server rosbridge_websocket_launch.xml
 
 在PC或者支持RVIZ的环境下安装ROS2，这里以foxy版本为例，运行
 
+tros foxy 版本
 ```bash
 source /opt/ros/foxy/setup.bash
+ros2 run rviz2 rviz2
+```
+tros humble 版本
+```bash
+source /opt/ros/humble/setup.bash
 ros2 run rviz2 rviz2
 ```
 
